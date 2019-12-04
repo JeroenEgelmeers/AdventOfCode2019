@@ -1,14 +1,16 @@
 package days.tests;
 
 import days.controllers.Day1Controller;
+import days.tests.helpers.DayTestInterface;
 import models.FuelCalculator;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-public class Day1Test {
+public class Day1Test implements DayTestInterface {
 
   // Part 1
   @Test
@@ -22,17 +24,12 @@ public class Day1Test {
 
   @Test
   public void part_1_mass_list() {
-    List<Integer> massList = new ArrayList<>();
-    massList.add(12);
-    massList.add(14);
-    massList.add(1969);
-    massList.add(100756);
-
+    List<Integer> massList = new ArrayList<>(Arrays.asList(12,14,1969,100756));
     assertTotalFuelRequired(massList, (2 + 2 + 654 + 33583));
   }
 
   @Test
-  public void part_1_solutionDayOnePartOne() { Assert.assertEquals(new Integer(3412094), new Day1Controller(PATH_TO_FILE).solutionPartOne()); }
+  public void part_1_solution() { Assert.assertEquals(new Integer(3412094), new Day1Controller(PATH_TO_FILE).solutionPartOne()); }
 
   // part 2
   @Test
@@ -41,10 +38,8 @@ public class Day1Test {
   public void part_2_mass_of_1969_returns_966() { Assert.assertEquals(966, new FuelCalculator().calcRecursiveFuel(1969)); }
   @Test
   public void part_2_mass_of_100756_returns_50346() { Assert.assertEquals(50346, new FuelCalculator().calcRecursiveFuel(100756));  }
-
   @Test
-  public void part_2_solutionDayOnePartTwo() { Assert.assertEquals(5115267, new Day1Controller(PATH_TO_FILE).solutionPartTwo()); }
-
+  public void part_2_solution() { Assert.assertEquals(new Integer(5115267), new Day1Controller(PATH_TO_FILE).solutionPartTwo()); }
 
   // assert methods
   private void assertTotalFuelNeeded(int mass, int expected) { Assert.assertEquals(expected, new FuelCalculator().calcModalFuel(mass)); }
