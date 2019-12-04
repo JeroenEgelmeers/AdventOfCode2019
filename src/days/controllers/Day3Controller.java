@@ -2,7 +2,7 @@ package days.controllers;
 
 import days.controllers.helpers.DayController;
 
-public class Day3Controller extends DayController<Integer> {
+public class Day3Controller extends DayController<Integer, Integer> {
 
   public Day3Controller(String filePath) {
     super(filePath);

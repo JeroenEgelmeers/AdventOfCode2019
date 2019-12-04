@@ -4,7 +4,7 @@ import days.controllers.helpers.DayController;
 import factorys.DayFileReader;
 import models.FuelCalculator;
 
-public class Day1Controller extends DayController<Integer> {
+public class Day1Controller extends DayController<Integer, Integer> {
   private FuelCalculator fuelCalculator = new FuelCalculator();
 
   public Day1Controller(String filePath) {

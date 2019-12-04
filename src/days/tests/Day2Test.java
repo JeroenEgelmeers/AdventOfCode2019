@@ -2,7 +2,7 @@ package days.tests;
 
 import days.controllers.Day2Controller;
 import days.tests.helpers.DayTestInterface;
-import models.OptCodeProgram;
+import models.IntCodeProgram;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -45,14 +45,18 @@ public class Day2Test implements DayTestInterface {
   // Part 2
   @Test
   public void part_2_solution() {
-    Assert.fail("Not yet implemented");
+    int[] output = new Day2Controller(PATH_TO_FILE).partTwoOutput(19690720);
+
+    Assert.assertEquals(98, output[0]);
+    Assert.assertEquals(20, output[1]);
+    Assert.assertEquals(9820, 100*output[0]+output[1]);
   }
 
   private Integer calculateProgram(List<Integer> testList) {
-    OptCodeProgram optCodeProgram = new OptCodeProgram(testList);
+    IntCodeProgram optCodeProgram = new IntCodeProgram(testList);
     optCodeProgram.calculateProgram();
 
-    return optCodeProgram.getProgram().get(0);
+    return optCodeProgram.getIntCodeList().get(0);
   }
 
   private static final String PATH_TO_FILE = "C:/Workspace/AdventOfCode/src/days/textFiles/day2.txt";
