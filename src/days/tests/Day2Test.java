@@ -56,5 +56,5 @@ public class Day2Test implements DayTestInterface {
     return new IntCodeProgram(testList).calculateProgram().get(0);
   }
 
-  private static final String PATH_TO_FILE = "C:/Workspace/AdventOfCode/src/days/textFiles/day2.txt";
+  private static final String PATH_TO_FILE = "../src/days/textFiles/day2.txt";
 }

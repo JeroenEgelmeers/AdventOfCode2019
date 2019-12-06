@@ -36,5 +36,5 @@ public class Day3Test implements DayTestInterface {
   }
 
 
-  private static final String PATH_TO_FILE = "C:/Workspace/AdventOfCode2019/src/days/textFiles/day3.txt";
+  private static final String PATH_TO_FILE = "../src/days/textFiles/day3.txt";
 }
