@@ -21,7 +21,9 @@ public class Day2Controller extends DayController<Integer, String> {
   }
 
   @Override
-  public Integer solutionPartOne() { return this.optCodeProgram.startProgramAndReturnOutputCode(); }
+  public Integer solutionPartOne() {
+    this.optCodeProgram.restoreGravityAssistProgram(12, 2);
+    return this.optCodeProgram.calculateProgram().get(0); }
 
   @Override
   public String solutionPartTwo() {
