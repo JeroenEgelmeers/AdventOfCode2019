@@ -1,7 +1,7 @@
 package days.tests;
 
+import days.controllers.Day3Controller;
 import days.tests.helpers.DayTestInterface;
-import factorys.DayFileReader;
 import models.WiresPathCalculator;
 import org.junit.Assert;
 import org.junit.Test;
@@ -13,9 +13,8 @@ public class Day3Test implements DayTestInterface {
   @Override
   @Test
   public void part_1_solution() {
-    WiresPathCalculator pathCalculator = new WiresPathCalculator(new DayFileReader().fileToStringList(PATH_TO_FILE, "\n"));
-    int distance = pathCalculator.getClosestMatch();
-    Assert.assertEquals(1337, distance);
+    Integer distance = new Day3Controller(PATH_TO_FILE).solutionPartOne();
+    Assert.assertEquals(1337, (int)distance);
   }
 
   @Test
@@ -34,6 +33,9 @@ public class Day3Test implements DayTestInterface {
 
   @Test
   @Override
-  public void part_2_solution() {}
+  public void part_2_solution() {
+    // TODO: Implementation
+  }
+
   private static final String PATH_TO_FILE = "src/days/textFiles/day3.txt";
 }

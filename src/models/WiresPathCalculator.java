@@ -84,15 +84,15 @@ public class WiresPathCalculator {
     String current = ".";
     if (!this.grid.containsKey(gridY)) {
       this.grid.put(gridY, new HashMap<>());
-    } else {
+    }else {
       if (this.grid.get(gridY).containsKey(gridX)) {
         current = this.grid.get(gridY).get(gridX);
       }
     }
 
-    if (current.equals(".") ) {
+    if (current.equals(".")) {
       this.grid.get(gridY).put(gridX, wireName);
-    } else if(!current.equals(wireName) && !current.equals("o")) {
+    }else if(!current.equals(wireName) && !current.equals("o")) {
       this.grid.get(gridY).put(gridX, "X");
       this.intersectionPoints.add(new int[]{gridX, gridY});
     }
