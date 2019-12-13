@@ -6,8 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 
 public class WiresPathCalculator {
-  private String wireOne;
-  private String wireTwo;
   private int centralPointX = 0;
   private int centralPointY = 0;
 
@@ -16,21 +14,24 @@ public class WiresPathCalculator {
 
   public WiresPathCalculator(List<String> wires) {
     this.intersectionPoints = new ArrayList<>();
-    this.wireOne = wires.get(0).replaceAll("(\\r|\\n)", "");
-    this.wireTwo = wires.get(1).replaceAll("(\\r|\\n)", "");
-    renderWireInGrid(Arrays.asList(this.wireOne.split(",")), "A");
-    renderWireInGrid(Arrays.asList(this.wireTwo.split(",")), "B");
+    String currentChar = "A";
+    for(String wire : wires) {
+      String stripWire = wire.replaceAll("(\\r|\\n)", "");
+      renderWireInGrid(Arrays.asList(stripWire.split(",")), currentChar);
+      currentChar = String.valueOf((char)(currentChar.charAt(0)+1));
+    }
   }
 
   private void renderWireInGrid(List<String> wire, String wireName) {
     int[] currentPos = { centralPointX, centralPointY };
+    int curStep = 1;
     for(String position : wire) {
-      currentPos = wireAction(position, wireName, currentPos);
+      currentPos = wireAction(position, wireName, currentPos, curStep);
+      curStep += Integer.valueOf(position.replaceAll("[^\\d]", ""));
     }
   }
 
-  // TODO: Better name; get closest point from central point where wires hit eachother.
-  public int getClosestMatch() {
+  public int getClosestIntersectionPoint() {
     int closest = Integer.MAX_VALUE;
     for(int[] iPoint : this.intersectionPoints) {
        int distance = getDistanceToCentralPoint(iPoint);
@@ -42,11 +43,22 @@ public class WiresPathCalculator {
     return closest;
   }
 
-  public int getDistanceToCentralPoint(int[] iPoint) {
+  public int getFewestStepsToIntersectionPoint() {
+    int lowest = -1;
+    for(int[] iPoint : this.intersectionPoints) {
+      if (iPoint.length > 2 && (iPoint[2] < lowest || lowest == -1)) {
+        lowest = iPoint[2];
+      }
+    }
+
+    return lowest;
+  }
+
+  private int getDistanceToCentralPoint(int[] iPoint) {
     return Math.abs(iPoint[0] - this.centralPointX) + Math.abs(iPoint[1] - this.centralPointY);
   }
 
-  private int[] wireAction(String action, String wireName, int[] currentPos) {
+  private int[] wireAction(String action, String wireName, int[] currentPos, int curStep) {
     int currentX = currentPos[0];
     int currentY = currentPos[1];
 
@@ -59,20 +71,32 @@ public class WiresPathCalculator {
 
       switch(action.charAt(0)) {
         case 'R':
-          for(int i = currentX + 1; i < currentX + (steps - 1); i++) { updateGrid(i, currentY, wireName); }
-          updateGrid(currentX + steps, currentY, "+");
+          for(int i = currentX + 1; i < currentX + (steps - 1); i++) {
+            updateGrid(i, currentY, wireName, curStep);
+            curStep++;
+          }
+          updateGrid(currentX + steps, currentY, "+", curStep);
           return new int[]{currentX + steps, currentY};
         case 'U':
-          for(int i = currentY + 1; i < currentY + (steps - 1); i++) { updateGrid(currentX, i, wireName); }
-          updateGrid(currentX, currentY + steps, "+");
+          for(int i = currentY + 1; i < currentY + (steps - 1); i++) {
+            updateGrid(currentX, i, wireName, curStep);
+            curStep++;
+          }
+          updateGrid(currentX, currentY + steps, "+", curStep);
           return new int[]{currentX, currentY + steps};
         case 'L':
-          for(int i = currentX - 1; i > currentX - (steps - 1); i--) { updateGrid(i, currentY, wireName); }
-          updateGrid(currentX - steps, currentY, "+");
+          for(int i = currentX - 1; i > currentX - (steps - 1); i--) {
+            updateGrid(i, currentY, wireName, curStep);
+            curStep++;
+          }
+          updateGrid(currentX - steps, currentY, "+", curStep);
           return new int[]{currentX - steps, currentY};
         case 'D':
-          for(int i = currentY - 1; i > currentY  - (steps - 1); i--) { updateGrid(currentX, i, wireName); }
-          updateGrid(currentX, currentY - steps, "+");
+          for(int i = currentY - 1; i > currentY  - (steps - 1); i--) {
+            updateGrid(currentX, i, wireName, curStep);
+            curStep++;
+          }
+          updateGrid(currentX, currentY - steps, "+", curStep);
           return new int[]{currentX, currentY - steps};
         default:
           break;
@@ -80,7 +104,7 @@ public class WiresPathCalculator {
       return new int[]{};
   }
 
-  private void updateGrid(int gridX, int gridY, String wireName) {
+  private void updateGrid(int gridX, int gridY, String wireName, int curStep) {
     String current = ".";
     if (!this.grid.containsKey(gridY)) {
       this.grid.put(gridY, new HashMap<>());
@@ -91,10 +115,11 @@ public class WiresPathCalculator {
     }
 
     if (current.equals(".")) {
-      this.grid.get(gridY).put(gridX, wireName);
-    }else if(!current.equals(wireName) && !current.equals("o")) {
+      this.grid.get(gridY).put(gridX, wireName + curStep);
+    }else if(!current.replaceAll("\\d","").equals(wireName) && !current.equals("o")) {
+      int stepsPreviousWire = Integer.parseInt(current.replaceAll("[^\\d]", ""));
       this.grid.get(gridY).put(gridX, "X");
-      this.intersectionPoints.add(new int[]{gridX, gridY});
+      this.intersectionPoints.add(new int[]{gridX, gridY, stepsPreviousWire + curStep});
     }
   }
 }
