@@ -15,17 +15,16 @@ public class Day3Controller extends DayController<Integer, Integer> {
   @Override
   public void run() {
     System.out.println("Part one: " + solutionPartOne() + " [V]");
-    System.out.println("Part two: " + solutionPartTwo() + " [X]");
+    System.out.println("Part two: " + solutionPartTwo() + " [V]");
   }
 
   @Override
   public Integer solutionPartOne() {
-    return pathCalculator.getClosestMatch();
+    return pathCalculator.getClosestIntersectionPoint();
   }
 
   @Override
   public Integer solutionPartTwo() {
-    System.out.println("Not yet implemented");
-    return null;
+    return pathCalculator.getFewestStepsToIntersectionPoint();
   }
 }
