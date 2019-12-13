@@ -45,5 +45,5 @@ public class Day1Test implements DayTestInterface {
   private void assertTotalFuelNeeded(int mass, int expected) { Assert.assertEquals(expected, new FuelCalculator().calcModalFuel(mass)); }
   private void assertTotalFuelRequired(List<Integer> massList, int expected) { Assert.assertEquals(expected, new FuelCalculator().calcModuleFuelFromList(massList)); }
 
-  public static final String PATH_TO_FILE = "C:/Workspace/AdventOfCode/src/days/textFiles/day1.txt";
+  public static final String PATH_TO_FILE = "../src/days/textFiles/day1.txt";
 }

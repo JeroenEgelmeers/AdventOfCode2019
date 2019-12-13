@@ -22,4 +22,20 @@ public class DayFileReader {
 
     return null;
   }
+
+  public List<String> fileToStringList(String filepath, String delimiter) {
+    try(Scanner scanner = new Scanner(new File(filepath)).useDelimiter(delimiter)) {
+      List<String> massList = new ArrayList<>();
+
+      while (scanner.hasNext()) {
+        massList.add(scanner.next());
+      }
+
+      return massList;
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    }
+
+    return null;
+  }
 }

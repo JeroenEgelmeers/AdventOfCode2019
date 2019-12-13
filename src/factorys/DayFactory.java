@@ -8,7 +8,7 @@ public class DayFactory {
   private static final String   PACKAGE     = "days.controllers";
   private static final String   CONTROLLER  = "Day{0}Controller";
   private static final String   METHOD_NAME = "run";
-  private static final String   PATH_TO_FILE = "C:/Workspace/AdventOfCode/src/days/textFiles/day{0}.txt";
+  private static final String   PATH_TO_FILE = "C:/Workspace/AdventOfCode2019/src/days/textFiles/day{0}.txt";
 
   private int amountDays;
   private int startDay;

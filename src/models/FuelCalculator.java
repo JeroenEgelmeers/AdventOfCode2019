@@ -18,9 +18,12 @@ public class FuelCalculator {
     return total;
   }
 
-  /*
-  * Only calculate the fuel per module without recursion.
-  * */
+  /**
+   * Only calculate the fuel per module without recursion.
+   *
+   * @param massList
+   * @return the total
+   */
   public int calcModuleFuelFromList(List<Integer> massList) {
     int total = 0;
 
@@ -31,8 +34,11 @@ public class FuelCalculator {
     return total;
   }
 
-  /*
+  /**
    * Calculate the Fuel with recursion (total).
+   *
+   * @param massList
+   * @return Recursive total; complete amount.
    */
   public int calcTotalFuelRequired(List<Integer> massList) {
     int total = 0;
