@@ -12,7 +12,7 @@ import java.util.List;
 
 public class Day2Test implements DayTestInterface {
 
-  // Part 1
+  /** Part one **/
   @Test
   public void part_1_first_example_test() {
     List<Integer> testList = new ArrayList<>(Arrays.asList(1,0,0,0,99));
@@ -42,7 +42,7 @@ public class Day2Test implements DayTestInterface {
     Assert.assertEquals(Integer.valueOf(2782414), new Day2Controller(PATH_TO_FILE).solutionPartOne());
   }
 
-  // Part 2
+  /** Part two **/
   @Test
   public void part_2_solution() {
     int[] output = new Day2Controller(PATH_TO_FILE).partTwoOutput(19690720);
@@ -56,5 +56,5 @@ public class Day2Test implements DayTestInterface {
     return new IntCodeProgram(testList).calculateProgram().get(0);
   }
 
-  private static final String PATH_TO_FILE = "../src/days/textFiles/day2.txt";
+  private static final String PATH_TO_FILE = "src/days/textFiles/day2.txt";
 }
