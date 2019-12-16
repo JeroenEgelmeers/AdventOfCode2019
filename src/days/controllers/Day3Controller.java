@@ -19,9 +19,7 @@ public class Day3Controller extends DayController<Integer, Integer> {
   }
 
   @Override
-  public Integer solutionPartOne() {
-    return pathCalculator.getClosestIntersectionPoint();
-  }
+  public Integer solutionPartOne() { return pathCalculator.getClosestIntersectionPoint(); }
 
   @Override
   public Integer solutionPartTwo() {

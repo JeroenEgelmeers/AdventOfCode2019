@@ -14,6 +14,7 @@ public class Day4Controller  extends DayController<Integer, Integer> {
   @Override
   public void run() {
     System.out.println("Part one: " + solutionPartOne() + " [V]");
+    System.out.println("Part one: " + solutionPartTwo() + " [V]");
   }
 
   @Override
@@ -22,7 +23,7 @@ public class Day4Controller  extends DayController<Integer, Integer> {
     int i = range[0];
     int validPassword = 0;
     while(i < range[1]) {
-      if (secureContainer.passwordIsValid(i, range)) { validPassword++; }
+      if (secureContainer.passwordIsValid(i, range, false)) { validPassword++; }
       i++;
     }
 
@@ -31,6 +32,16 @@ public class Day4Controller  extends DayController<Integer, Integer> {
 
   @Override
   public Integer solutionPartTwo() {
-    return null;
+    int[] range = {272091,815432};
+    int i = range[0];
+    int validPassword = 0;
+    while(i < range[1]) {
+      if (secureContainer.passwordIsValid(i, range, true)) {
+        validPassword++;
+      }
+      i++;
+    }
+
+    return validPassword;
   }
 }

@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Day3Test implements DayTestInterface {
+
+  /** Part one **/
   @Override
   @Test
   public void part_1_solution() {
@@ -30,6 +32,7 @@ public class Day3Test implements DayTestInterface {
     Assert.assertEquals(159, distance);
   }
 
+  /** Part two **/
   @Test
   public void part_2_first_example() {
     List<String> list = new ArrayList<>();
